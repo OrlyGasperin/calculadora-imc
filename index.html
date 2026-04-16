@@ -7,353 +7,76 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --bg: #0d1117;
-    --card: #161b22;
-    --border: #30363d;
-    --green: #39d353;
-    --green-dim: #1a5c2a;
-    --yellow: #e3b341;
-    --orange: #f0883e;
-    --red: #f85149;
-    --blue: #58a6ff;
-    --text: #e6edf3;
-    --muted: #8b949e;
-    --radius: 16px;
+    --bg: #0d1117; --card: #161b22; --border: #30363d;
+    --green: #39d353; --green-dim: #1a5c2a;
+    --yellow: #e3b341; --orange: #f0883e; --red: #f85149; --blue: #58a6ff;
+    --text: #e6edf3; --muted: #8b949e; --radius: 16px;
   }
-
   body {
     font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem 1rem 4rem;
-    position: relative;
-    overflow-x: hidden;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; padding: 2rem 1rem 4rem; position: relative; overflow-x: hidden;
   }
-
-  /* Atmospheric background */
   body::before {
-    content: '';
-    position: fixed;
-    top: -30%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 700px;
-    height: 700px;
+    content: ''; position: fixed; top: -30%; left: 50%; transform: translateX(-50%);
+    width: 700px; height: 700px;
     background: radial-gradient(circle, rgba(57,211,83,0.08) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
+    pointer-events: none; z-index: 0;
   }
-
-  .page-wrap {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: 580px;
-  }
-
-  /* Header */
-  header {
-    text-align: center;
-    margin-bottom: 3rem;
-    animation: fadeDown 0.7s ease both;
-  }
-
+  .page-wrap { position: relative; z-index: 1; width: 100%; max-width: 580px; }
+  header { text-align: center; margin-bottom: 3rem; animation: fadeDown 0.7s ease both; }
   .badge {
-    display: inline-block;
-    background: var(--green-dim);
-    color: var(--green);
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 0.3em 1em;
-    border-radius: 999px;
-    border: 1px solid rgba(57,211,83,0.3);
-    margin-bottom: 1.2rem;
+    display: inline-block; background: var(--green-dim); color: var(--green);
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 0.3em 1em; border-radius: 999px; border: 1px solid rgba(57,211,83,0.3); margin-bottom: 1.2rem;
   }
-
-  h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(2.2rem, 6vw, 3.2rem);
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
-    margin-bottom: 0.8rem;
-  }
-
-  h1 span {
-    color: var(--green);
-  }
-
-  header p {
-    color: var(--muted);
-    font-size: 1rem;
-    max-width: 380px;
-    margin: 0 auto;
-    line-height: 1.6;
-  }
-
-  /* Card */
-  .card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 2.2rem 2.4rem;
-    margin-bottom: 1.5rem;
-    animation: fadeUp 0.7s 0.15s ease both;
-  }
-
-  .field-group {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.2rem;
-    margin-bottom: 1.2rem;
-  }
-
-  .field {
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
-  }
-
+  h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.2rem, 6vw, 3.2rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 0.8rem; }
+  h1 span { color: var(--green); }
+  header p { color: var(--muted); font-size: 1rem; max-width: 380px; margin: 0 auto; line-height: 1.6; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.2rem 2.4rem; margin-bottom: 1.5rem; animation: fadeUp 0.7s 0.15s ease both; }
+  .field-group { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem; }
+  .field { display: flex; flex-direction: column; gap: 0.45rem; }
   .field.full { grid-column: 1 / -1; }
-
-  label {
-    font-size: 0.78rem;
-    font-weight: 500;
-    color: var(--muted);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
+  label { font-size: 0.78rem; font-weight: 500; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
   input, select {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1rem;
-    padding: 0.75rem 1rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    width: 100%;
-    appearance: none;
+    background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+    color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 1rem;
+    padding: 0.75rem 1rem; transition: border-color 0.2s, box-shadow 0.2s; width: 100%; appearance: none;
   }
-
-  input:focus, select:focus {
-    outline: none;
-    border-color: var(--green);
-    box-shadow: 0 0 0 3px rgba(57,211,83,0.12);
-  }
-
+  input:focus, select:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(57,211,83,0.12); }
   input::placeholder { color: #444d56; }
-
-  .unit-toggle {
-    display: flex;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    overflow: hidden;
-  }
-
-  .unit-toggle button {
-    flex: 1;
-    background: none;
-    border: none;
-    color: var(--muted);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.88rem;
-    font-weight: 500;
-    padding: 0.65rem;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s;
-  }
-
-  .unit-toggle button.active {
-    background: var(--green-dim);
-    color: var(--green);
-  }
-
-  .btn-calc {
-    width: 100%;
-    background: var(--green);
-    border: none;
-    border-radius: 10px;
-    color: #0d1117;
-    cursor: pointer;
-    font-family: 'Syne', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    padding: 1rem;
-    margin-top: 0.6rem;
-    transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .btn-calc:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(57,211,83,0.28);
-  }
-
+  .unit-toggle { display: flex; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .unit-toggle button { flex: 1; background: none; border: none; color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500; padding: 0.65rem; cursor: pointer; transition: background 0.2s, color 0.2s; }
+  .unit-toggle button.active { background: var(--green-dim); color: var(--green); }
+  .btn-calc { width: 100%; background: var(--green); border: none; border-radius: 10px; color: #0d1117; cursor: pointer; font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 0.04em; padding: 1rem; margin-top: 0.6rem; transition: transform 0.15s, box-shadow 0.15s; }
+  .btn-calc:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(57,211,83,0.28); }
   .btn-calc:active { transform: translateY(0); }
-
-  /* Result */
-  .result-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 2rem 2.4rem;
-    display: none;
-    animation: fadeUp 0.4s ease both;
-  }
-
+  .result-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem 2.4rem; display: none; animation: fadeUp 0.4s ease both; }
   .result-card.show { display: block; }
-
-  .result-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-    gap: 0.8rem;
-  }
-
-  .result-label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-    font-weight: 500;
-  }
-
-  .result-value {
-    font-family: 'Syne', sans-serif;
-    font-size: 3.5rem;
-    font-weight: 800;
-    line-height: 1;
-  }
-
-  .result-category {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-  }
-
-  /* IMC scale bar */
+  .result-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.8rem; }
+  .result-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-weight: 500; }
+  .result-value { font-family: 'Syne', sans-serif; font-size: 3.5rem; font-weight: 800; line-height: 1; }
+  .result-category { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; }
   .scale-wrap { margin: 1.5rem 0 0.5rem; }
-
-  .scale-bar {
-    height: 8px;
-    border-radius: 999px;
-    background: linear-gradient(to right, #58a6ff 0%, #39d353 25%, #e3b341 55%, #f0883e 75%, #f85149 100%);
-    position: relative;
-    margin-bottom: 0.6rem;
-  }
-
-  .scale-needle {
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 16px;
-    height: 16px;
-    background: white;
-    border-radius: 50%;
-    border: 3px solid var(--bg);
-    box-shadow: 0 0 0 2px white;
-    transition: left 0.6s cubic-bezier(.34,1.56,.64,1);
-  }
-
-  .scale-labels {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.68rem;
-    color: var(--muted);
-  }
-
-  .tip-box {
-    background: rgba(57,211,83,0.06);
-    border: 1px solid rgba(57,211,83,0.15);
-    border-radius: 10px;
-    padding: 0.9rem 1.1rem;
-    font-size: 0.88rem;
-    color: var(--muted);
-    line-height: 1.5;
-    margin-top: 1.5rem;
-  }
-
-  /* Reference table */
-  .table-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.6rem 2.4rem;
-    margin-top: 1.5rem;
-    animation: fadeUp 0.7s 0.3s ease both;
-  }
-
-  .table-card h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-    margin-bottom: 1rem;
-  }
-
+  .scale-bar { height: 8px; border-radius: 999px; background: linear-gradient(to right, #58a6ff 0%, #39d353 25%, #e3b341 55%, #f0883e 75%, #f85149 100%); position: relative; margin-bottom: 0.6rem; }
+  .scale-needle { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 16px; height: 16px; background: white; border-radius: 50%; border: 3px solid var(--bg); box-shadow: 0 0 0 2px white; transition: left 0.6s cubic-bezier(.34,1.56,.64,1); }
+  .scale-labels { display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--muted); }
+  .tip-box { background: rgba(57,211,83,0.06); border: 1px solid rgba(57,211,83,0.15); border-radius: 10px; padding: 0.9rem 1.1rem; font-size: 0.88rem; color: var(--muted); line-height: 1.5; margin-top: 1.5rem; }
+  .table-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.6rem 2.4rem; margin-top: 1.5rem; animation: fadeUp 0.7s 0.3s ease both; }
+  .table-card h2 { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1rem; }
   table { width: 100%; border-collapse: collapse; }
-
   tr { border-bottom: 1px solid var(--border); }
   tr:last-child { border-bottom: none; }
-
-  td {
-    padding: 0.6rem 0;
-    font-size: 0.88rem;
-  }
-
+  td { padding: 0.6rem 0; font-size: 0.88rem; }
   td:last-child { text-align: right; font-weight: 600; }
-
-  .dot {
-    display: inline-block;
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    margin-right: 0.5rem;
-    vertical-align: middle;
-  }
-
-  footer {
-    text-align: center;
-    color: var(--muted);
-    font-size: 0.78rem;
-    margin-top: 2.5rem;
-    opacity: 0.6;
-  }
-
-  /* Error */
-  .error-msg {
-    color: var(--red);
-    font-size: 0.82rem;
-    margin-top: 0.6rem;
-    display: none;
-  }
-
-  /* Animations */
-  @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 0.5rem; vertical-align: middle; }
+  footer { text-align: center; color: var(--muted); font-size: 0.78rem; margin-top: 2.5rem; opacity: 0.6; }
+  .error-msg { color: var(--red); font-size: 0.82rem; margin-top: 0.6rem; display: none; }
+  .obs-menor { background: rgba(88,166,255,0.07); border: 1px solid rgba(88,166,255,0.2); border-radius: 10px; padding: 0.9rem 1.1rem; font-size: 0.85rem; color: #8b949e; line-height: 1.5; margin-top: 1rem; display: none; }
+  @keyframes fadeDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
   @media (max-width: 500px) {
     .card, .result-card, .table-card { padding: 1.6rem 1.4rem; }
     .field-group { grid-template-columns: 1fr; }
@@ -364,7 +87,6 @@
 </head>
 <body>
 <div class="page-wrap">
-
   <header>
     <div class="badge">🩺 Ferramenta de Saúde</div>
     <h1>Calcule seu <span>IMC</span></h1>
@@ -372,7 +94,7 @@
   </header>
 
   <div class="card">
-    <div style="margin-bottom:1rem">
+    <div style="margin-bottom:1.2rem">
       <label style="display:block;margin-bottom:0.45rem">Unidade de medida</label>
       <div class="unit-toggle">
         <button class="active" onclick="setUnit('metric')">Métrico (kg / cm)</button>
@@ -381,18 +103,22 @@
     </div>
 
     <div class="field-group">
-      <div class="field" id="weight-field">
+      <div class="field">
         <label id="weight-label">Peso (kg)</label>
-        <input type="number" id="weight" placeholder="Ex: 70" min="1" max="500" step="0.1">
+        <input type="text" inputmode="decimal" id="weight" placeholder="Ex: 70" oninput="sanitizeDecimal(this)">
       </div>
-      <div class="field" id="height-field">
+      <div class="field">
         <label id="height-label">Altura (cm)</label>
-        <input type="number" id="height" placeholder="Ex: 170" min="1" max="300" step="0.1">
+        <input type="text" inputmode="decimal" id="height" placeholder="Ex: 170" oninput="sanitizeDecimal(this)">
       </div>
-      <div class="field full">
-        <label>Sexo biológico <span style="color:var(--muted);font-weight:400;text-transform:none">(opcional)</span></label>
+      <div class="field">
+        <label>Idade</label>
+        <input type="number" id="age" placeholder="Ex: 25" min="2" max="120" step="1">
+      </div>
+      <div class="field">
+        <label>Sexo biológico <span style="color:var(--muted);font-weight:400;text-transform:none;font-size:0.72rem">(opcional)</span></label>
         <select id="sex">
-          <option value="">Prefiro não informar</option>
+          <option value="">Não informar</option>
           <option value="m">Masculino</option>
           <option value="f">Feminino</option>
         </select>
@@ -403,7 +129,6 @@
     <button class="btn-calc" onclick="calcular()">Calcular meu IMC →</button>
   </div>
 
-  <!-- Result -->
   <div class="result-card" id="result-card">
     <div class="result-header">
       <div>
@@ -429,32 +154,19 @@
     </div>
 
     <div class="tip-box" id="tip-box"></div>
+    <div class="obs-menor" id="obs-menor">
+      ℹ️ <strong>Atenção:</strong> Para crianças e adolescentes (até 19 anos), o IMC é interpretado de forma diferente, levando em conta idade e sexo por meio de curvas de crescimento. Consulte um pediatra para avaliação completa.
+    </div>
   </div>
 
-  <!-- Table -->
   <div class="table-card">
-    <h2>Tabela de referência</h2>
+    <h2>Tabela de referência (adultos)</h2>
     <table>
-      <tr>
-        <td><span class="dot" style="background:#58a6ff"></span>Abaixo do peso</td>
-        <td>Menos de 18,5</td>
-      </tr>
-      <tr>
-        <td><span class="dot" style="background:#39d353"></span>Peso normal</td>
-        <td>18,5 – 24,9</td>
-      </tr>
-      <tr>
-        <td><span class="dot" style="background:#e3b341"></span>Sobrepeso</td>
-        <td>25,0 – 29,9</td>
-      </tr>
-      <tr>
-        <td><span class="dot" style="background:#f0883e"></span>Obesidade grau I</td>
-        <td>30,0 – 34,9</td>
-      </tr>
-      <tr>
-        <td><span class="dot" style="background:#f85149"></span>Obesidade grau II+</td>
-        <td>35,0 ou mais</td>
-      </tr>
+      <tr><td><span class="dot" style="background:#58a6ff"></span>Abaixo do peso</td><td>Menos de 18,5</td></tr>
+      <tr><td><span class="dot" style="background:#39d353"></span>Peso normal</td><td>18,5 – 24,9</td></tr>
+      <tr><td><span class="dot" style="background:#e3b341"></span>Sobrepeso</td><td>25,0 – 29,9</td></tr>
+      <tr><td><span class="dot" style="background:#f0883e"></span>Obesidade grau I</td><td>30,0 – 34,9</td></tr>
+      <tr><td><span class="dot" style="background:#f85149"></span>Obesidade grau II+</td><td>35,0 ou mais</td></tr>
     </table>
   </div>
 
@@ -464,23 +176,35 @@
 <script>
   let unit = 'metric';
 
+  // Troca vírgula por ponto em tempo real
+  function sanitizeDecimal(input) {
+    input.value = input.value.replace(',', '.');
+  }
+
+  function parseDecimal(val) {
+    if (!val) return NaN;
+    return parseFloat(val.replace(',', '.').replace(/[^0-9.]/g, ''));
+  }
+
   function setUnit(u) {
     unit = u;
-    const btns = document.querySelectorAll('.unit-toggle button');
-    btns.forEach((b,i) => b.classList.toggle('active', (i === 0 && u === 'metric') || (i === 1 && u === 'imperial')));
+    document.querySelectorAll('.unit-toggle button').forEach((b, i) =>
+      b.classList.toggle('active', (i === 0 && u === 'metric') || (i === 1 && u === 'imperial'))
+    );
     document.getElementById('weight-label').textContent = u === 'metric' ? 'Peso (kg)' : 'Peso (lb)';
-    document.getElementById('height-label').textContent = u === 'metric' ? 'Altura (cm)' : 'Altura (polegadas)';
+    document.getElementById('height-label').textContent = u === 'metric' ? 'Altura (cm)' : 'Altura (pol.)';
     document.getElementById('weight').placeholder = u === 'metric' ? 'Ex: 70' : 'Ex: 154';
     document.getElementById('height').placeholder = u === 'metric' ? 'Ex: 170' : 'Ex: 67';
     document.getElementById('result-card').classList.remove('show');
   }
 
   function calcular() {
-    const wRaw = parseFloat(document.getElementById('weight').value);
-    const hRaw = parseFloat(document.getElementById('height').value);
-    const err = document.getElementById('error-msg');
+    const wRaw = parseDecimal(document.getElementById('weight').value);
+    const hRaw = parseDecimal(document.getElementById('height').value);
+    const age  = parseInt(document.getElementById('age').value) || null;
+    const err  = document.getElementById('error-msg');
 
-    if (!wRaw || !hRaw || wRaw <= 0 || hRaw <= 0) {
+    if (isNaN(wRaw) || isNaN(hRaw) || wRaw <= 0 || hRaw <= 0) {
       err.style.display = 'block';
       return;
     }
@@ -489,7 +213,7 @@
     let kg = wRaw, cm = hRaw;
     if (unit === 'imperial') { kg = wRaw * 0.453592; cm = hRaw * 2.54; }
 
-    const m = cm / 100;
+    const m   = cm / 100;
     const imc = kg / (m * m);
     const imcStr = imc.toFixed(1);
 
@@ -518,10 +242,11 @@
     document.getElementById('tip-box').textContent = tip;
     document.getElementById('result-card').classList.add('show');
 
-    setTimeout(() => {
-      document.getElementById('needle').style.left = needle + '%';
-    }, 50);
+    // Aviso para menores de 20 anos
+    const obsEl = document.getElementById('obs-menor');
+    obsEl.style.display = (age !== null && age < 20) ? 'block' : 'none';
 
+    setTimeout(() => { document.getElementById('needle').style.left = needle + '%'; }, 50);
     document.getElementById('result-card').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
